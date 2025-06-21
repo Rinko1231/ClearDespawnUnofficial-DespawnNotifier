@@ -16,14 +16,21 @@ public class RenderItemEntityExtended extends ItemEntityRenderer {
     @Override
     public void render(ItemEntity entity, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
         int remainingTime = entity.lifespan - entity.getAge();
-        if (remainingTime <= 20 * DespawnNotifierConfig.itemFlashStartTime.get()) {
+        int itemFlashStartTime = DespawnNotifierConfig.itemFlashStartTime.get();
+        if (remainingTime <= 20 * itemFlashStartTime) {
             if (DespawnNotifierConfig.isUrgentFlashEnabled.get()) {
-               /* int flashFactor = Math.max(2, remainingTime / 20);
-                if (remainingTime % flashFactor < 0.5f * flashFactor) {
-                    return;
-                }*/
-                if (remainingTime % 12 < 4) {
-                    return;
+                if (remainingTime > itemFlashStartTime * 10 ) {  // "*20/2" = "*10"
+                    if (remainingTime % 12 < 4) {
+                        return;
+                    }
+                } else if (remainingTime > itemFlashStartTime * 5 ) {  // "*20/4" = "*5"
+                    if (remainingTime % 9 < 3) {
+                        return;
+                    }
+                } else {  // 剩余0~5秒之间
+                    if (remainingTime % 6 < 2) {
+                        return;
+                    }
                 }
             } else if (remainingTime % 20 < 10) {
                 return;
