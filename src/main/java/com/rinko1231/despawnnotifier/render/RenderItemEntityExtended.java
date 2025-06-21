@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.world.entity.item.ItemEntity;
 
+import static java.lang.Math.min;
+
 public class RenderItemEntityExtended extends ItemEntityRenderer {
     public RenderItemEntityExtended(EntityRendererProvider.Context context) {
         super(context);
@@ -15,24 +17,24 @@ public class RenderItemEntityExtended extends ItemEntityRenderer {
 
     @Override
     public void render(ItemEntity entity, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
-        int remainingTime = entity.lifespan - entity.getAge();
-        int itemFlashStartTime = DespawnNotifierConfig.itemFlashStartTime.get();
-        if (remainingTime <= 20 * itemFlashStartTime) {
+        int remainingTimeTick = entity.lifespan - entity.getAge();
+        int itemFlashStartTimeSecond = min(entity.lifespan/20, DespawnNotifierConfig.itemFlashStartTime.get());
+        if (remainingTimeTick <= 20 * itemFlashStartTimeSecond) {
             if (DespawnNotifierConfig.isUrgentFlashEnabled.get()) {
-                if (remainingTime > itemFlashStartTime * 10 ) {  // "*20/2" = "*10"
-                    if (remainingTime % 12 < 4) {
+                if (remainingTimeTick > (itemFlashStartTimeSecond * 10) ) {  // "itemFlashStartTimeSecond*20/2" = "itemFlashStartTimeSecond*10"
+                    if (remainingTimeTick % 20 < 7) {
                         return;
                     }
-                } else if (remainingTime > itemFlashStartTime * 5 ) {  // "*20/4" = "*5"
-                    if (remainingTime % 9 < 3) {
+                } else if (remainingTimeTick > (itemFlashStartTimeSecond * 5) ) {  // "itemFlashStartTimeSecond*20/4" = "itemFlashStartTimeSecond*5"
+                    if (remainingTimeTick % 12 < 4) {
                         return;
                     }
-                } else {  // 剩余0~5秒之间
-                    if (remainingTime % 6 < 2) {
+                } else {  // 剩余1/4闪烁时间
+                    if (remainingTimeTick % 3 < 2) {
                         return;
                     }
                 }
-            } else if (remainingTime % 20 < 10) {
+            } else if (remainingTimeTick % 20 < 7) {
                 return;
             }
         }
