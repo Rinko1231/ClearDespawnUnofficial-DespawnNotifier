@@ -11,15 +11,11 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import org.slf4j.LoggerFactory;
-
-import java.util.logging.Logger;
 
 @Mod(DespawnNotifier.MODID)
 public class DespawnNotifier {
 	
 	public static final String MODID = "despawnnotifier";
-	public static final String MOD_NAME = "DespawnNotifier";
 	
 	public DespawnNotifier(ModContainer modContainer) {
 			modContainer.registerConfig(ModConfig.Type.COMMON, DespawnNotifierConfig.SPEC,"DespawnNotifierConfig.toml");

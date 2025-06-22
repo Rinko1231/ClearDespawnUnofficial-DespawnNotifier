@@ -6,7 +6,9 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
+import net.minecraft.client.renderer.entity.state.ItemEntityRenderState;
 import net.minecraft.world.entity.item.ItemEntity;
+import org.jetbrains.annotations.NotNull;
 
 import static java.lang.Math.min;
 
@@ -14,11 +16,21 @@ public class RenderItemEntityExtended extends ItemEntityRenderer {
     public RenderItemEntityExtended(EntityRendererProvider.Context context) {
         super(context);
     }
+    private int itemEntityLifespan;
+    private int itemEntityAge;
 
     @Override
-    public void render(ItemEntity entity, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
-        int remainingTimeTick = entity.lifespan - entity.getAge();
-        int itemFlashStartTimeSecond = min(entity.lifespan/20, DespawnNotifierConfig.itemFlashStartTime.get());
+    public void extractRenderState(ItemEntity entity, @NotNull ItemEntityRenderState state, float partialTicks) {
+        this.itemEntityLifespan = entity.lifespan;
+        this.itemEntityAge = entity.getAge();
+        super.extractRenderState(entity, state, partialTicks);
+    }
+
+
+    @Override
+    public void render(@NotNull ItemEntityRenderState itemEntityRenderState, @NotNull PoseStack p_115030_, @NotNull MultiBufferSource p_115031_, int p_115032_) {
+        int remainingTimeTick = this.itemEntityLifespan - this.itemEntityAge;
+        int itemFlashStartTimeSecond = min(this.itemEntityLifespan/20, DespawnNotifierConfig.itemFlashStartTime.get());
         if (remainingTimeTick <= 20 * itemFlashStartTimeSecond) {
             if (DespawnNotifierConfig.isUrgentFlashEnabled.get()) {
                 if (remainingTimeTick > (itemFlashStartTimeSecond * 10) ) {  // "itemFlashStartTimeSecond*20/2" = "itemFlashStartTimeSecond*10"
@@ -38,13 +50,16 @@ public class RenderItemEntityExtended extends ItemEntityRenderer {
                 return;
             }
         }
-        super.render(entity, entityYaw, partialTicks, matrixStack, buffer, packedLight);
+        super.render(itemEntityRenderState, p_115030_, p_115031_, p_115032_) ;
     }
 
-    public static class Factory implements EntityRendererProvider<ItemEntity> {
-        @Override
-        public EntityRenderer<ItemEntity> create(Context context) {
-            return new RenderItemEntityExtended(context);
-        }
-    }
+
+   public static class Factory implements EntityRendererProvider<ItemEntity> {
+       @Override
+       public @NotNull EntityRenderer<ItemEntity, ?> create(@NotNull Context context) {
+           return new RenderItemEntityExtended(context);
+       }
+   }
+
 }
+

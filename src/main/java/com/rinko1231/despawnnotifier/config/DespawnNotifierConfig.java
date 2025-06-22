@@ -14,7 +14,7 @@ public class DespawnNotifierConfig {
         BUILDER.push("Despawn Notifier Config");
 
         itemFlashStartTime = BUILDER
-                .defineInRange("Blinking start time before the item despawns, in seconds", 20,0,6000);
+                .defineInRange("Blinking start time before the item despawns, in seconds", 20,0,300);
         isUrgentFlashEnabled =BUILDER
                 .define("Set to true to have item flash faster as it gets closer to despawning",true);
 
