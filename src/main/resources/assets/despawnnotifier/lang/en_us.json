@@ -1,0 +1,9 @@
+{
+  "config.despawnnotifier.config": "Despawn Notifier Config",
+  "config.despawnnotifier.item_flash_start_time_percentage": "Flash Start Time (%)",
+  "config.despawnnotifier.is_urgent_flash_enabled": "Enable Urgent Flash",
+  "config.despawnnotifier.urgent_flash_threshold_percentage": "Urgent Flash Threshold (%)",
+  "config.despawnnotifier.flash_alpha_min": "Minimum Flash Alpha",
+  "config.despawnnotifier.flash_alpha_max": "Maximum Flash Alpha",
+  "config.despawnnotifier.flash_cycle_ticks": "Flash Cycle Ticks"
+}
