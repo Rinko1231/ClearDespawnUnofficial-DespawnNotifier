@@ -19,8 +19,8 @@ public class DespawnNotifier {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
     public DespawnNotifier(Dist dist, ModContainer modContainer) {
-        modContainer.registerConfig(ModConfig.Type.COMMON, DespawnNotifierConfig.SPEC, "DespawnNotifierConfig.toml");
         if (dist.isClient()) {
+            modContainer.registerConfig(ModConfig.Type.CLIENT, DespawnNotifierConfig.SPEC, "DespawnNotifierConfig.toml");
 			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         }
 	}

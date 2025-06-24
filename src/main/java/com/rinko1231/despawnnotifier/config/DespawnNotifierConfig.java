@@ -28,7 +28,7 @@ public class DespawnNotifierConfig {
         urgentFlashThresholdPercentage = BUILDER
                 .translation("config.despawnnotifier.urgent_flash_threshold_percentage")
                 .comment("When remaining time is below this percentage, urgent flashing will activate (if enabled)")
-                .defineInRange("urgentFlashThresholdPercentage", 5, 0, 100);
+                .defineInRange("urgentFlashThresholdPercentage", 10, 0, 100);
         flashAlphaMin = BUILDER
                 .translation("config.despawnnotifier.flash_alpha_min")
                 .comment("Minimum alpha (transparency) when flashing. 0.0 = fully transparent, 1.0 = opaque")
@@ -40,7 +40,7 @@ public class DespawnNotifierConfig {
         flashCycleTicks = BUILDER
                 .translation("config.despawnnotifier.flash_cycle_ticks")
                 .comment("Tick duration of one full flash cycle")
-                .defineInRange("flashCycleTicks", 20, 0, Integer.MAX_VALUE);
+                .defineInRange("flashCycleTicks", 20, 1, 200);
 
         SPEC = BUILDER.build();
     }

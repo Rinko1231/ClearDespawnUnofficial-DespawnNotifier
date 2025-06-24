@@ -8,7 +8,7 @@
     "ItemEntityMixin"
   ],
   "client": [
-    "client.ItemRendererMixin"
+    "client.RenderTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
