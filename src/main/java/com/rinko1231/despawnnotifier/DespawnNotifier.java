@@ -2,36 +2,30 @@ package com.rinko1231.despawnnotifier;
 
 
 import com.rinko1231.despawnnotifier.config.DespawnNotifierConfig;
-import com.rinko1231.despawnnotifier.render.RenderItemEntityExtended;
-import net.minecraft.world.entity.EntityType;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.logging.Logger;
 
 @Mod(DespawnNotifier.MODID)
 public class DespawnNotifier {
-	
-	public static final String MODID = "despawnnotifier";
-	public static final String MOD_NAME = "DespawnNotifier";
-	
-	public DespawnNotifier(ModContainer modContainer) {
-			modContainer.registerConfig(ModConfig.Type.COMMON, DespawnNotifierConfig.SPEC,"DespawnNotifierConfig.toml");
-		}
+    public static final String MODID = "despawnnotifier";
+    public static final String MOD_NAME = "DespawnNotifier";
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
-	@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-	public static class Events {
-
-		@SubscribeEvent
-		public static void registerRenderer(EntityRenderersEvent.RegisterRenderers event) {
-			event.registerEntityRenderer(EntityType.ITEM, new RenderItemEntityExtended.Factory());
-		}
-
+    public DespawnNotifier(Dist dist, ModContainer modContainer) {
+        if (dist.isClient()) {
+            modContainer.registerConfig(ModConfig.Type.CLIENT, DespawnNotifierConfig.SPEC, "DespawnNotifierConfig.toml");
+			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+        }
 	}
+
+    public static boolean isDev(){
+        return !FMLEnvironment.production;
+    }
 }

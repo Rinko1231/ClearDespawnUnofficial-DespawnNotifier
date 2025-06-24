@@ -1,0 +1,9 @@
+{
+  "config.despawnnotifier.config": "物品消失闪烁配置",
+  "config.despawnnotifier.item_flash_start_time_percentage": "开始闪烁时间（%）",
+  "config.despawnnotifier.is_urgent_flash_enabled": "启用紧急闪烁",
+  "config.despawnnotifier.urgent_flash_threshold_percentage": "紧急闪烁触发阈值（%）",
+  "config.despawnnotifier.flash_alpha_min": "最小闪烁透明度",
+  "config.despawnnotifier.flash_alpha_max": "最大闪烁透明度",
+  "config.despawnnotifier.flash_cycle_ticks": "闪烁周期（tick）"
+}
