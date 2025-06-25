@@ -5,5 +5,6 @@
   "config.despawnnotifier.urgent_flash_threshold_percentage": "Urgent Flash Threshold (%)",
   "config.despawnnotifier.flash_alpha_min": "Minimum Flash Alpha",
   "config.despawnnotifier.flash_alpha_max": "Maximum Flash Alpha",
-  "config.despawnnotifier.flash_cycle_ticks": "Flash Cycle Ticks"
+  "config.despawnnotifier.flash_cycle_ticks": "Flash Cycle Ticks",
+  "config.despawnnotifier.enable_dev_mode": "Enable Dev Mode and Display the Age of the Drops"
 }

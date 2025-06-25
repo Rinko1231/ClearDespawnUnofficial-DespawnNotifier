@@ -11,6 +11,7 @@ public class DespawnNotifierConfig {
     public static ModConfigSpec.DoubleValue flashAlphaMin;
     public static ModConfigSpec.DoubleValue flashAlphaMax;
     public static ModConfigSpec.IntValue flashCycleTicks;
+    public static ModConfigSpec.BooleanValue devMode;
 
     static
     {
@@ -41,7 +42,10 @@ public class DespawnNotifierConfig {
                 .translation("config.despawnnotifier.flash_cycle_ticks")
                 .comment("Tick duration of one full flash cycle")
                 .defineInRange("flashCycleTicks", 20, 1, 200);
-
+        devMode = BUILDER
+                .translation("config.despawnnotifier.enable_dev_mode")
+                .comment("Display the age of the drops")
+                .define("Dev Mode",false);
         SPEC = BUILDER.build();
     }
 }

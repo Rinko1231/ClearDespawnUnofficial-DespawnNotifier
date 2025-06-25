@@ -17,7 +17,7 @@ license = "MIT"
 # The modid of the mod
 modId = "despawnnotifier" #mandatory
 # The version number of the mod
-version = "1.21.1-1.0.0" #mandatory
+version = "1.21.1-2.0.0" #mandatory
 # A display name for the mod
 displayName = "Despawn Notifier" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://docs.neoforge.net/docs/misc/updatechecker/
@@ -29,7 +29,7 @@ displayName = "Despawn Notifier" #mandatory
 # A text field displayed in the mod UI
 credits="strikerrocker" #optional
 # A text field displayed in the mod UI
-authors = "Rinko1231" #optional
+authors = "Rinko1231, KLjiana" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description = '''
 Flashes the item on ground after a certain amount of time to indicate its going to despawn

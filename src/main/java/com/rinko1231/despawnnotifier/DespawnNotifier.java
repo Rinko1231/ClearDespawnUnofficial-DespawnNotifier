@@ -26,6 +26,6 @@ public class DespawnNotifier {
 	}
 
     public static boolean isDev(){
-        return !FMLEnvironment.production;
+        return (!FMLEnvironment.production)||DespawnNotifierConfig.devMode.get();
     }
 }
